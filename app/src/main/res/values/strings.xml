@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WaterTracker</string>
-    <string name="water_tracker">Water Tracker</string>
+    <string name="water_tracker">Water\nTracker</string>
     <string name="time">Time</string>
     <string name="total_drunk">Goal to drink</string>
 </resources>
