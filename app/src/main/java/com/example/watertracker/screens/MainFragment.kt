@@ -1,7 +1,10 @@
 package com.example.watertracker.screens
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.watertracker.R
 import com.example.watertracker.databinding.FragmentMainBinding
@@ -14,5 +17,14 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentMainBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.addButton.setOnClickListener {
+            val toast = Toast.makeText(requireContext(), "ASDADA", Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
+
+
     }
 }

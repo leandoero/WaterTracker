@@ -8,4 +8,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="item_home">Home</string>
     <string name="item_history">History</string>
+
+    <array name = "choice_liters">
+        <item>250 ml</item>
+        <item>500 ml</item>
+        <item>1 liter</item>
+        <item>2 liter</item>
+   </array>
+    
 </resources>
