@@ -17,15 +17,32 @@ import java.util.logging.Handler
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-    private val currentTime = timeFormat.format(Date())
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    private val handler = android.os.Handler(Looper.getMainLooper())
+    private val updateTimeRunnable = object : Runnable {        //Runnable - это интерфейс , у которого есть один метод run()
+        //Этот метод выполняет то, что я хочу сделать в фоновом или основном потоке.
+        //Handler.post(...) и Handler.postDelayed(...) ожидают объект, реализующий интерфейс Runnable.
+        override fun run() {
+            //Получаем текущее время в формате "HH:mm"
+            val currentTime = timeFormat.format(Date())
+            binding.localTime.text = currentTime
+            //говорит запусти этот Runnable (то есть run()) снова, но через 1 секунду.
+            handler.postDelayed(this, 1000) // обновлять каждую секунду
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentMainBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        binding.localTime.text = currentTime
+        /*алгоритм подробно
+        * handler.post(updateTimeRunnable) — запускает первое выполнение.
+          run():получает текущее время; обновляет TextView; ставит this (себя) на повторное выполнение через 1 секунду.
+          Через 1 секунду run() запускается снова — и всё повторяется.
+        * */
+        handler.post(updateTimeRunnable)
+
         binding.addButton.setOnClickListener {
             val toast = Toast.makeText(requireContext(), "ASDADA", Toast.LENGTH_SHORT)
             toast.show()

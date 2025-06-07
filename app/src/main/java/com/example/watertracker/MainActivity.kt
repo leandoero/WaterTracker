@@ -25,9 +25,8 @@ class MainActivity : AppCompatActivity() {
         //Достаётся NavController из NavHostFragment. NavHostFragment всегда содержит NavController, который управляет переходами между фрагментами.
         val navController = navHostFragment.navController
 
-        //Связывает нижнее меню с навигационным контроллером.
+        //Связывает нижнее меню с навигационным контроллером
+
         binding.bottomNav.setupWithNavController(navController)
-
-
     }
 }
