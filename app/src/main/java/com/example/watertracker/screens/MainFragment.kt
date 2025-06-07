@@ -7,7 +7,10 @@ import android.view.View
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import com.example.watertracker.R
+import com.example.watertracker.data.Item
+import com.example.watertracker.data.MainDb
 import com.example.watertracker.databinding.FragmentMainBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -20,6 +23,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
     private val handler = android.os.Handler(Looper.getMainLooper())
+    lateinit var db: MainDb
+
     private val updateTimeRunnable = object : Runnable {        //Runnable - это интерфейс , у которого есть один метод run()
         //Этот метод выполняет то, что я хочу сделать в фоновом или основном потоке.
         //Handler.post(...) и Handler.postDelayed(...) ожидают объект, реализующий интерфейс Runnable.
@@ -36,6 +41,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         _binding = FragmentMainBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
+        db = MainDb.getDb(requireContext())
         /*алгоритм подробно
         * handler.post(updateTimeRunnable) — запускает первое выполнение.
           run():получает текущее время; обновляет TextView; ставит this (себя) на повторное выполнение через 1 секунду.
@@ -44,9 +50,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         handler.post(updateTimeRunnable)
 
         binding.addButton.setOnClickListener {
-            val toast = Toast.makeText(requireContext(), "ASDADA", Toast.LENGTH_SHORT)
+            val item = Item(null,binding.spinnerLiters.selectedItem.toString(), binding.localTime.text.toString())
+            Thread{
+                db.getDao().insertItem(item)
+            }.start()
+
+            val toast = Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT)
             toast.show()
         }
-
     }
 }
