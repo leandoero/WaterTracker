@@ -10,12 +10,14 @@ data class Item(
     @PrimaryKey(autoGenerate = true)
     var id:Int? = null,
     @ColumnInfo("volume")
-    var volume: String,
+    var volume: Float,
     @ColumnInfo("time")
-    var time:String
+    var time:String,
+    @ColumnInfo("date")
+    var date:String
 ){
     override fun toString(): String{
-    return "$volume — $time"}
+    return "$volume ml — $time"}
 }
 
 

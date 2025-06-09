@@ -50,13 +50,25 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         handler.post(updateTimeRunnable)
 
         binding.addButton.setOnClickListener {
-            val item = Item(null,binding.spinnerLiters.selectedItem.toString(), binding.localTime.text.toString())
-            Thread{
-                db.getDao().insertItem(item)
-            }.start()
+            if(binding.slider.value > 0f){
+                val selected = binding.spinnerLiters.selectedItem.toString()
+                val numberOnly = selected.filter { it.isDigit() || it == '.' }
+                val value = numberOnly.toFloat()
+                val time = binding.localTime.text.toString()
+                val dateOnly = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
-            val toast = Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT)
-            toast.show()
+
+                val item = Item(null,value, time, dateOnly)
+                Thread{
+                    db.getDao().insertItem(item)
+                }.start()
+                val toast = Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT)
+                toast.show()
+            }
+            else{
+                val toast = Toast.makeText(requireContext(), "Set a goal to continue.", Toast.LENGTH_LONG)
+                toast.show()
+            }
         }
     }
 }

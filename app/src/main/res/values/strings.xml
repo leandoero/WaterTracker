@@ -12,8 +12,8 @@
     <array name = "choice_liters">
         <item>250 ml</item>
         <item>500 ml</item>
-        <item>1 liter</item>
-        <item>2 liter</item>
+        <item>1000 ml</item>
+        <item>2000 ml</item>
    </array>
     
 </resources>
