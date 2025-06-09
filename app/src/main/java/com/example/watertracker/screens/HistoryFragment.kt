@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.PI
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
     private var currentItems: List<Item> = emptyList()
@@ -49,6 +50,15 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
                 db.getDao().deleteItem(item)  // здесь suspend, работает в IO-потоке
                 withContext(Dispatchers.Main) {
                     Toast.makeText(requireContext(), "Item deleted", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                lifecycleScope.launch {
+                    db.getDao().deleteAllItems()
+                    Toast.makeText(requireContext(), "All elements removed", Toast.LENGTH_SHORT).show()
+                    binding.checkbox.isChecked = false
                 }
             }
         }
