@@ -13,15 +13,17 @@ import com.example.watertracker.R
 import com.example.watertracker.data.Item
 import com.example.watertracker.data.MainDb
 import com.example.watertracker.databinding.FragmentMainBinding
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.logging.Handler
+
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
+    var currentSumVolume: Float = 0f
     private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -67,25 +69,35 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         * */
         handler.post(updateTimeRunnable)
         saveSlider()
-        binding.addButton.setOnClickListener {
 
-            if (binding.slider.value > 0f ) {
+        lifecycleScope.launch {
+            db.getDao().getSumVolumeByDate(dateOnly).collect { value ->
+                currentSumVolume = value ?: 0f
+            }
+        }
+
+        binding.addButton.setOnClickListener {
+            val goal = binding.slider.value * 1000
+            if (binding.slider.value <= 0f) {
+                Toast.makeText(requireContext(), "Set a goal to continue.", Toast.LENGTH_LONG).show()
+            } else if (currentSumVolume >= goal) {
+                Toast.makeText(requireContext(), "Goal for the day completed!", Toast.LENGTH_LONG).show()
+            } else {
                 val selected = binding.spinnerLiters.selectedItem.toString()
                 val numberOnly = selected.filter { it.isDigit() || it == '.' }
                 val value = numberOnly.toFloat()
-                val time = binding.localTime.text.toString()
-                val item = Item(null, value, time, dateOnly)
-                Thread {
+                val timeNow = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+                val item = Item(null, value, timeNow, dateOnly)
+
+                lifecycleScope.launch(Dispatchers.IO) {
                     db.getDao().insertItem(item)
-                }.start()
-                val toast = Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT)
-                toast.show()
-            }
-            else {
-                val toast =
-                    Toast.makeText(requireContext(), "Set a goal to continue.", Toast.LENGTH_LONG)
-                toast.show()
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
             }
         }
+
     }
 }
