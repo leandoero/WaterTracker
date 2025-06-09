@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_color">#587987</color>
+    <color name="ban_main_color">#7D7777</color>
 </resources>
