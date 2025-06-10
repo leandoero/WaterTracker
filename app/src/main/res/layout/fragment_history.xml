@@ -8,24 +8,24 @@
     <TextView
         android:id="@+id/second_title"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginTop="@dimen/margin_title_top"
+        android:layout_marginEnd="@dimen/margin_title_end"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
         android:text="@string/drink_history"
 
-        android:textSize="60sp"
+        android:textSize="@dimen/title_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_list"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/icon_list"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="105dp"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
+        android:layout_marginStart="@dimen/margin_main_start"
+        android:layout_marginTop="@dimen/margin_main_top"
         android:background="@drawable/ic_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +42,8 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/zero_width"
+        android:layout_height="@dimen/zero_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

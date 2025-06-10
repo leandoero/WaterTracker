@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero_width">0dp</dimen>
+    <dimen name="zero_height">0dp</dimen>
+    <dimen name="title_size">60sp</dimen>
+    <dimen name="icon_width">100dp</dimen>
+    <dimen name="icon_height">100dp</dimen>
+    <dimen name="margin_main_start">20dp</dimen>
+    <dimen name="margin_main_top">105dp</dimen>
+    <dimen name="title_height">200dp</dimen>
+    <dimen name="margin_title_top">60dp</dimen>
+    <dimen name="margin_title_end">20dp</dimen>
+    <dimen name="main_size">35sp</dimen>
+</resources>

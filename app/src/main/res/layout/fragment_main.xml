@@ -8,13 +8,13 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="@dimen/title_height"
+        android:layout_marginTop="@dimen/margin_title_top"
+        android:layout_marginEnd="@dimen/margin_title_end"
         android:fontFamily="@font/nunito_bold"
         android:gravity="center"
         android:text="@string/water_tracker"
-        android:textSize="60sp"
+        android:textSize="@dimen/title_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/icon_glass"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/rubik_font"
         android:text="00:00"
-        android:textSize="35sp"
+        android:textSize="@dimen/main_size"
         app:layout_constraintBottom_toTopOf="@+id/slider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.787"
@@ -43,7 +43,7 @@
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/time"
-        android:textSize="35sp"
+        android:textSize="@dimen/main_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nunito_medium"
         android:text="@string/total_drunk"
-        android:textSize="35sp"
+        android:textSize="@dimen/main_size"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/time" />
@@ -77,10 +77,10 @@
 
     <View
         android:id="@+id/icon_glass"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="105dp"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
+        android:layout_marginStart="@dimen/margin_main_start"
+        android:layout_marginTop="@dimen/margin_main_top"
         android:background="@drawable/glass_of_water"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,8 +88,8 @@
     <FrameLayout
         android:id="@+id/add_button"
         android:layout_marginTop="40dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,8 +97,8 @@
 
         <ImageView
             android:id="@+id/iconImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/icon_width"
+            android:layout_height="@dimen/icon_height"
             android:src="@drawable/add_plus" />
     </FrameLayout>
 
