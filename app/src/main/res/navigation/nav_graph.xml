@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.watertracker.screens.HistoryFragment"
-        android:label="HistoryFragment" />
+        android:label="HistoryFragment" >
+        <action
+            android:id="@+id/action_historyFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.watertracker.screens.MainFragment"
